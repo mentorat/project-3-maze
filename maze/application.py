@@ -13,6 +13,7 @@ class Application:
         self.running = True
 
         self.game = Game()
+        self.hero = self.game.hero
 
         self.display = Display(self.game)
         self.keyboard = Keyboard(self.game)
@@ -22,8 +23,12 @@ class Application:
         while self.running:
             self.display.refresh()
 
-            if self.game.hero.found_exit():
-                exit_message = "Exit found ! You won."
+            if self.hero.found_exit():
+                exit_message = "The exit was found !"
+                if self.hero.found_all_items():
+                    exit_message += " But you didn't find all the items ! You lost."
+                else:
+                    exit_message = " You also found all the items ! You won."
                 break
 
             command, repeat = self.keyboard.wait_for_command()

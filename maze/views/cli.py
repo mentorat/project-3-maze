@@ -10,12 +10,13 @@ from maze.config.settings import (
     PASSAGE,
     EXIT,
     HERO,
+    ITEMS,
     C__WALL,
     C__PASSAGE,
     C__EXIT,
     C__HERO,
     C__LEVELS,
-    ITEMS,
+    C_ITEMS,
 )
 from maze.models.game import Game
 from maze.models.position import Position
@@ -50,7 +51,7 @@ class Display:
                 if position == self.maze.hero.position:
                     char, color = HERO, C__HERO
                 elif position in self.maze.items:
-                    char, color = ITEMS[self.maze.items[position]], "cyan"
+                    char, color = ITEMS[self.maze.items[position]], C_ITEMS
                 elif position in self.maze:
                     if position == self.maze.exit:
                         char, color = EXIT, C__EXIT

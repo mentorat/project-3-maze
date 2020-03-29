@@ -2,6 +2,8 @@
 
 from typing import Optional
 
+from maze.config.settings import ITEMS
+
 from maze.models.position import Position
 from maze.models.messages import messages
 
@@ -22,6 +24,10 @@ class Hero:
             bool: True if the player found the exit, then False.
         """
         return self.position == self.maze.exit
+
+    def found_all_items(self):
+        """Return True if the Hero found all items."""
+        return self.items == list(ITEMS.keys())
 
     def move(self, direction: str) -> bool:
         """Déplace le héro dans la direction demandée.

@@ -19,6 +19,7 @@ C__PASSAGE = "grey"
 C__WALL = "blue"
 C__HERO = "green"
 C__LEVELS = {0: "green", 1: "yellow", 2: "red"}
+C_ITEMS = "red"
 
 # PATHS
 
