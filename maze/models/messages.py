@@ -30,7 +30,8 @@ class Messages(list):
             level (int): the message level (0 for info, 1 for warning, 2 for error).
         """
         for index, item in enumerate(self):
-            if level == item[1]:
+            msg = item[0]
+            if msg.startswith("New position") and message.startswith("New position"):
                 del self[index]
         self.append((message, level))
 

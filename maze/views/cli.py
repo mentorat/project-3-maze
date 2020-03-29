@@ -15,6 +15,7 @@ from maze.config.settings import (
     C__EXIT,
     C__HERO,
     C__LEVELS,
+    ITEMS,
 )
 from maze.models.game import Game
 from maze.models.position import Position
@@ -30,6 +31,7 @@ class Display:
         self.use_color = use_color
         self.game = game
         self.maze = game.maze
+        self.hero = game.hero
         self.turns = 0
 
     def refresh(self):
@@ -47,6 +49,8 @@ class Display:
                 position = Position(x, y)
                 if position == self.maze.hero.position:
                     char, color = HERO, C__HERO
+                elif position in self.maze.items:
+                    char, color = ITEMS[self.maze.items[position]], "cyan"
                 elif position in self.maze:
                     if position == self.maze.exit:
                         char, color = EXIT, C__EXIT
@@ -57,14 +61,25 @@ class Display:
                 cprint(char, color, end="")
 
         print("\n")
-        for message, level in messages.get():
-            color = C__LEVELS[level]
-            cprint(message, color)
-
+        self.print_bag()
+        print("\n")
+        self.print_messages()
         print("\n")
         self.print_the_help()
 
         cprint(f"\n\nEnter a key:", C__LEVELS[1], end=" ")
+
+    def print_bag(self):
+        """Print the player's bag."""
+        for name in ITEMS:
+            has_item = "x" if name in self.hero.items else " "
+            cprint(f"[{has_item}] {name}", "yellow", end=" ")
+
+    def print_messages(self):
+        """Print the messages."""
+        for message, level in messages.get():
+            color = C__LEVELS[level]
+            cprint(message, color)
 
     def print_the_help(self):
         """Print the help message."""

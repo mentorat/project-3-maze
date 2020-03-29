@@ -9,6 +9,7 @@ EXIT = "e"
 PASSAGE = "."
 WALL = "#"
 HERO = "I"
+ITEMS = {"tube": "t", "gum": "g", "goo": "o"}
 
 # COLORS
 

@@ -13,6 +13,7 @@ class Hero:
         """Init."""
         self.maze = None
         self.position: Optional[Position] = None
+        self.items = []
 
     def found_exit(self) -> bool:
         """Prédicat qui retourne VRAI si le héro a trouvé la sortie.

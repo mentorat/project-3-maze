@@ -1,8 +1,9 @@
 """Map module."""
 
+import random
 from typing import Set, Optional
 
-from maze.config.settings import PASSAGE, START, EXIT
+from maze.config.settings import PASSAGE, START, EXIT, ITEMS
 
 from maze.models.position import Position
 from maze.models.hero import Hero
@@ -34,6 +35,8 @@ class Map:
 
         self.passages: Set[Position] = set()
         self.walls: Set[Position] = set()
+
+        self.items = {}
 
         self.height = 0
         self.width = 0
@@ -81,3 +84,12 @@ class Map:
         hero.position = self.start
         hero.maze = self
         self.hero = hero
+
+    def place_items(self):
+        """Initialize the items."""
+        passages = [
+            pos for pos in self.passages if pos != self.start and pos != self.exit
+        ]
+        for name in ITEMS:
+            position = random.choice(passages)
+            self.items[position] = name
