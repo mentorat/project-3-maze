@@ -1,7 +1,7 @@
 """Map module."""
 
 import random
-from typing import Set, Optional
+from typing import Set, Dict, Optional
 
 from maze.config.settings import PASSAGE, START, EXIT, ITEMS
 
@@ -36,7 +36,7 @@ class Map:
         self.passages: Set[Position] = set()
         self.walls: Set[Position] = set()
 
-        self.items = {}
+        self.items: Dict[Position, str] = {}
 
         self.height = 0
         self.width = 0

@@ -37,12 +37,23 @@ class Display:
 
     def refresh(self):
         """Display the map."""
-        self.turns += 1
         os.system("cls" if os.name == "nt" else "clear")
+        self.print_header()
+        self.print_maze()
+        self.print_bag()
+        self.print_messages()
+        self.print_the_help()
+        self.print_input()
+
+    def print_header(self):
+        """Print the header."""
+        self.turns += 1
         print("\n")
         cprint(" MAZE ".center(self.maze.width, "-"), "yellow")
         cprint(f" Turn {self.turns} ".center(self.maze.width, "-"), "yellow")
 
+    def print_maze(self):
+        """Print the maze."""
         for y in range(self.maze.height):
             print("", end="\n")
             for x in range(self.maze.width):
@@ -61,30 +72,28 @@ class Display:
                     char, color = WALL, C__WALL
                 cprint(char, color, end="")
 
-        print("\n")
-        self.print_bag()
-        print("\n")
-        self.print_messages()
-        print("\n")
-        self.print_the_help()
-
-        cprint(f"\n\nEnter a key:", C__LEVELS[1], end=" ")
-
     def print_bag(self):
         """Print the player's bag."""
+        print("\n")
         for name in ITEMS:
             has_item = "x" if name in self.hero.items else " "
             cprint(f"[{has_item}] {name}", "yellow", end=" ")
 
     def print_messages(self):
         """Print the messages."""
+        print("\n")
         for message, level in messages.get():
             color = C__LEVELS[level]
             cprint(message, color)
 
     def print_the_help(self):
         """Print the help message."""
+        print("\n")
         for key, value in messages.help.items():
             cprint(key, "yellow", end="")
             print(":", end=" ")
             cprint(value, "cyan")
+
+    def print_input(self):
+        """Print the input text."""
+        cprint(f"\n\nEnter a key:", C__LEVELS[1], end=" ")
