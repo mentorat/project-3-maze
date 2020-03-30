@@ -43,7 +43,7 @@ class Hero:
             messages.add(f"The direction '{direction}' is not valid.", 2)
         elif new_position in self.maze:
             self.position = new_position
-            messages.add(f"New position: '{new_position}'.", 0)
+            messages.add(f"New position: '{new_position}'.", 0, "position")
             return True
         elif new_position in self.maze.walls:
             messages.add(f"The position '{new_position}' is a wall.", 2)

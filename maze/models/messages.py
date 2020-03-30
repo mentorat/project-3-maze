@@ -4,12 +4,16 @@ Attributes:
     messages (Messages): handle the messages.
 """
 
+from typing import Optional
+
 
 class Messages(list):
     """Messages class."""
 
     def __init__(self):
         """Add the help dict."""
+        self._stack = {}
+        self._index = 0
         self.help = {
             "q or quit": "quit the game",
             "r or right": "moove to the right",
@@ -19,7 +23,7 @@ class Messages(list):
             "<direction> <x>": "repeat the direction x time",
         }
 
-    def add(self, message: str, level: int) -> None:
+    def add(self, message: str, level: int, tag: Optional[str] = None) -> None:
         """Add a message.
 
         Also purge the other message with the same level
@@ -28,12 +32,13 @@ class Messages(list):
         Args:
             message (str): the message.
             level (int): the message level (0 for info, 1 for warning, 2 for error).
+            tag (str): a tag if you want a unique type of message.
         """
-        for index, item in enumerate(self):
-            msg = item[0]
-            if msg.startswith("New position") and message.startswith("New position"):
-                del self[index]
-        self.append((message, level))
+        if not tag:
+            tag = self._index
+            self._index += 1
+
+        self._stack[tag] = (message, level)
 
     def get(self) -> list:
         """Return all messages and purge them.
@@ -41,9 +46,8 @@ class Messages(list):
         Returns:
             list: the messages list.
         """
-        result = self[:]
-        del self[:]
-        return result
+        result, self._stack = self._stack, {}
+        return result.values()
 
 
 messages = Messages()
