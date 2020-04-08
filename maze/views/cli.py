@@ -5,7 +5,7 @@ import os
 from termcolor import cprint
 from colorama import init as colorinit
 
-from maze.config.settings import (
+from maze.settings import (
     WALL,
     PASSAGE,
     EXIT,

@@ -46,6 +46,7 @@ class Messages(list):
         Returns:
             list: the messages list.
         """
+        self._index = 0
         result, self._stack = self._stack, {}
         return result.values()
 

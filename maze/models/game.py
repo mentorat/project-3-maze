@@ -1,6 +1,6 @@
 """Model wrapper."""
 
-from maze.config.settings import MAP_LEVEL_1
+from maze.settings import MAP_LEVEL_1
 from maze.models.map import Map
 from maze.models.hero import Hero
 from maze.models.messages import messages
@@ -16,7 +16,7 @@ class Game:
         self.maze.add(self.hero)
         self.maze.place_items()
 
-    def update(self, command: str, repeat: int):
+    def update(self, command: str, repeat: int) -> None:
         """Update the game from the command."""
         for _ in range(repeat):
             istrue = self.hero.move(command)

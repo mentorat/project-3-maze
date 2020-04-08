@@ -27,7 +27,15 @@ BASE_DIR = Path(".")
 MAZE_DIR = BASE_DIR / "maze"
 DATA_DIR = MAZE_DIR / "data"
 MAP_DIR = DATA_DIR / "maps"
+TILESET_DIR = DATA_DIR / "tileset"
 
 # DATA FILES
 
 MAP_LEVEL_1 = str(MAP_DIR / "level-1.txt")
+
+TILESET_1 = str(TILESET_DIR / "tileset-1.png")
+
+
+# PYGAME STUFF
+
+TILESETS = {1: (TILESET_1, 32)}

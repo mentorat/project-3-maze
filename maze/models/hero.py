@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from maze.config.settings import ITEMS
+from maze.settings import ITEMS
 
 from maze.models.position import Position
 from maze.models.messages import messages

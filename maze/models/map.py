@@ -3,7 +3,7 @@
 import random
 from typing import Set, Dict, Optional
 
-from maze.config.settings import PASSAGE, START, EXIT, ITEMS
+from maze.settings import PASSAGE, START, EXIT, ITEMS
 
 from maze.models.position import Position
 from maze.models.hero import Hero

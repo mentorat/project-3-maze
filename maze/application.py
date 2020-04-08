@@ -1,22 +1,26 @@
 """Application module."""
 
 from maze.models.game import Game
-from maze.views.cli import Display
-from maze.controllers.cli import Keyboard
+from maze import views
+from maze import controllers
 
 
 class Application:
-    """Classe contrôlant la boucle de jeu principale."""
+    """Classe contrôlant la boucle de jeu principale.
 
-    def __init__(self):
-        """Initilise l'application."""
+    Args:
+        mode (str): the game mode.
+    """
+
+    def __init__(self, mode: str):
+        """Initialize the application."""
         self.running = True
 
         self.game = Game()
         self.hero = self.game.hero
 
-        self.display = Display(self.game)
-        self.keyboard = Keyboard(self.game)
+        self.display = getattr(views, mode).Display(self.game)
+        self.keyboard = getattr(controllers, mode).Keyboard(self.game)
 
     def run(self) -> None:
         """Démarre l'interface de l'application."""
@@ -38,4 +42,10 @@ class Application:
                 exit_message = "Game closed."
                 self.running = False
 
+        try:
+            import pygame
+
+            pygame.quit()
+        except ImportError:
+            pass
         print(exit_message)

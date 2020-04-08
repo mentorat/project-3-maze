@@ -21,22 +21,22 @@ class Position(tuple):
     @property
     def up(self):
         """Position adjacente située au dessus."""
-        return self.__class__(self.x, self.y - 1)
+        return Position(self.x, self.y - 1)
 
     @property
     def down(self):
         """Position adjacente située au dessous."""
-        return self.__class__(self.x, self.y + 1)
+        return Position(self.x, self.y + 1)
 
     @property
     def left(self):
         """Position adjacente située à gauche."""
-        return self.__class__(self.x - 1, self.y)
+        return Position(self.x - 1, self.y)
 
     @property
     def right(self):
         """Position adjacente située à droite."""
-        return self.__class__(self.x + 1, self.y)
+        return Position(self.x + 1, self.y)
 
     def get(self, direction: str):
         """Get a position."""
